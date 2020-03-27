@@ -1,0 +1,13 @@
+1 - Criar um srate referente ao um contador.
+
+2 - Criar ações referente ao um contador.
+    . increment
+    . decrement
+    . reset
+
+3 - Criar reducer e registralo no store.
+    . counterReducer
+
+4 - Mostrar resultado na tela.
+
+5 - Dispachar ações para incrementar.

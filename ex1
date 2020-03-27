@@ -1,0 +1,16 @@
+1 - Criar um state referente ao um jogo:
+    .home
+    .away
+
+2 - Criar ações referente ao um jogo:
+    . homeScore
+    . awayScore
+    . resetScore
+    . setScores
+
+3 - Criar reducer e registralo no store:
+    .scoreboardReducer
+
+4 - Mostrar resultado do placar na tela.
+
+5 - Dispachar ações para incrementar placar.

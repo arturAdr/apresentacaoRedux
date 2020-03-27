@@ -1,0 +1,26 @@
+passos:
+
+1 - Instalar o NodeJs
+2 - Abrir o cmd.
+
+2 - Instalar o angular com o comando no cmd:
+    
+    npm install -g @angular/cli
+
+3 - Criar o projeto ex1 com o comando no cmd:
+    . ng new ex1  --routing=false --style=css.
+
+4 - Entrar no diretorio do projeto criado:
+    . cd ex1  
+
+5 - Executar o seguinte comando:
+    . npm install @ngrx/store @ngrx/store-devtools --save
+
+6 - Criar o projeto ex2 com o comando no cmd
+    ng new ex2 --routing=false --style=css
+
+7 - Entrar no diretorio do projeto criado:
+    . cd ex2
+
+8 - Executar o seguinte comando:
+    . npm install @ngrx/store @ngrx/store-devtools highcharts @ngrx/effects --save

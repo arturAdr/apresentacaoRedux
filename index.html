@@ -1,0 +1,261 @@
+<!doctype html>
+<html>
+
+<head>
+	<meta charset="utf-8">
+	<meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no">
+
+	<title>Redux.</title>
+
+	<link rel="stylesheet" href="css/reset.css">
+	<link rel="stylesheet" href="css/reveal.css">
+	<link rel="stylesheet" href="css/theme/black.css">
+
+	<!-- Theme used for syntax highlighting of code -->
+	<link rel="stylesheet" href="lib/css/monokai.css">
+
+	<!-- Printing and PDF exports -->
+	<script>
+		var link = document.createElement('link');
+		link.rel = 'stylesheet';
+		link.type = 'text/css';
+		link.href = window.location.search.match(/print-pdf/gi) ? 'css/print/pdf.css' : 'css/print/paper.css';
+		document.getElementsByTagName('head')[0].appendChild(link);
+	</script>
+</head>
+
+<body>
+	<div class="reveal">
+		<div class="slides">
+			<section>
+				Redux.
+				<br>
+				Uma breve explicação sobre a arquitetura Redux e suas principais características.
+			</section>
+			<section>
+				<section>
+					Imagine o seguinte problema:
+				</section>
+				<section>
+					Você possui uma View que pode atualizar um Model, e esse Model pode atualizar outro Model, o qual atualiza uma outra View, que poderia atualizar o mesmo Model.
+				</section>
+				<section>
+					Provavelmente, você ficará louco e perderá algumas horas resolvendo problemas deste tipo.
+				</section>
+				<section>
+					Você não sabe o que está acontecendo em sua aplicação, ela está lenta e tem problemas crônicos.
+				</section>
+				<section>
+					Se você passou ou passa por isso, provavelmente você já se perguntou:
+					<br>
+					Como posso evitar este tipo de problema no futuro?						
+				</section>
+				<section>
+					A resposta é o Redux.
+				</section>
+			</section>
+			<section>
+				<section>
+					Quando desenvolvemos aplicativos single-page em javascript, sempre temos que lidar com o gerenciamento de estado. Administrar o estado de uma aplicação é tão crítico que uma solução pobre pode colocar em risco a saúde de sua aplicação.
+				</section>
+				<section>
+					Por causa de problemas como este, a equipe de desenvolvimento do Facebook criou Flux.
+				</section>
+			</section>
+			<section>
+				<section>
+					O que é o FLUX?
+				</section>
+				<section>
+					O Flux é a arquitetura de interfaces que o Facebook utiliza para criar suas aplicações. O Flux complementa os componentes que podem ser combinados em uma interface, fazendo-os utilizar um fluxo de dados unidirecional.
+				</section>
+				<section>
+					<img width="100%" data-src="images/FLUX_ARQUITERURA.jpeg">
+				</section>
+			</section>
+			<section>
+				<section>
+					Eo Redux?
+				</section>
+				<section>
+					O Redux, por sua vez, segundo seu criador (Dan Abramov), não é tão diferente do Flux.
+				</section>
+				<section>
+						No geral ambos possuem a mesma arquitetura, mas o Redux é capaz de eliminar algumas complexidades fazendo uso de uma composição funcional onde o Flux utiliza callbacks .
+				</section>
+				<section>
+						O Flux não é fundamentalmente diferente, mas acredito que o Redux torna suas abstrações mais fáceis, ou pelo menos possível de implementar, o que seria bem difícil no Flux.
+				</section>
+			</section>
+			<section>
+				Triforce do Redux
+				<section>
+					O Redux é composto de três princípios que formam e definem o seu conceito. Eles são:
+				</section>
+				<section>
+					1. Um único ponto de verdade – Todo o estado da aplicação é mantido em apenas um único objeto chamado de Store.
+				</section>
+				<section>
+					2. O estado é imutável – O estado da aplicação é inalterável, a unica maneira de afeta-lo é emitindo uma Action com a mudança.
+				</section>
+				<section>
+					3. Mudanças são feitas apenas por funções puras – Reducers recebem as Actions emitidas e aplicam-nas ao estado. Sempre retornando um novo estado.
+				</section>
+			</section>
+			<section>
+				Pensando em Redux
+				<section>
+					Teoricamente falando, o Redux seria um controlador de estados geral para sua aplicação. 
+					O Redux é basicamente divido em 3 partes: store, reducers e actions.
+				</section>
+				<section>
+					A store
+					<br>
+					"store" é o nome dado pelo Facebook para o conjunto de 
+					estados da sua aplicação. 
+					Vamos pensar na store como um grande centro de informações,
+					 que possui disponibilidade para receber e entregar 
+					 exatamente o que o seu componente requisita 
+					 (seja uma função, ou uma informação propriamente dita). 
+					 Tecnicamente, a store é um objeto JavaScript que possui 
+					 todos os estados dos seus componentes.
+				</section>
+				<section>
+					Os reducers
+					<br>
+					Cada dado da store deve ter o seu próprio reducer, 
+					por exemplo: o dado "user" teria o seu reducer, 
+					chamado "userReducer". 
+					Um reducer é encarregado de lidar com todas as ações, 
+					como algum componente pedindo para alterar algum dado da store.
+				</section>
+				<section>
+					As actions
+					<br>
+					Actions são responsáveis por requisitar algo para um reducer. 
+					Elas devem ser sempre funções puras, o que, 
+					dizendo de uma forma leiga, 
+					quer dizer que elas devem APENAS enviar os dados ao reducer,
+					nada além disso.
+				</section>
+			</section>
+			<section>
+				<section>
+					NgRx
+					<br>
+					<img width="35%" data-src="images/ngrxLogo.svg">
+				</section>
+				<section>
+					<img data-src="images/state-management-lifecycle.png">
+				</section>
+			</section>
+			<section>
+				<section>
+					Como crio uma Action?
+				</section>
+				<section>
+					<pre><code class="hljs" data-trim data-noescape>
+					import { createAction, props } from '@ngrx/store';
+
+					export const login = createAction(
+					'[Login Page] Login',
+					props<{ username: string; password: string }>()
+					);</code></pre>	
+				</section>
+				<section>
+					<pre><code class="hljs" data-trim data-noescape>
+					onSubmit(username: string, password: string) {
+					  store.dispatch(login({ username: username, password: password }));
+					}
+					</code></pre>
+				</section>
+			</section>
+			<section>
+				<section>
+					Como crio un reducer?
+				</section>
+				<section>
+					<pre><code class="hljs" data-trim data-noescape>
+						import { createAction, props } from '@ngrx/store';
+
+						export const homeScore = createAction('[Scoreboard Page] Home Score');
+						export const awayScore = createAction('[Scoreboard Page] Away Score');
+						export const resetScore = createAction('[Scoreboard Page] Score Reset');
+						export const setScores = createAction('[Scoreboard Page] Set Scores', props<{game: Game}>());
+					</code></pre>
+				</section>
+				<section>
+					<pre><code class="hljs" data-trim data-noescape>
+						import { Action, createReducer, on } from '@ngrx/store';
+						import * as ScoreboardPageActions from '../actions/scoreboard-page.actions';
+						
+						export interface State {
+						  home: number;
+						  away: number;
+						}
+					</code></pre>
+				</section>
+				<section>
+					<pre><code class="hljs" data-trim data-noescape>
+					export const initialState: State = {
+					  home: 0,
+					  away: 0,
+					};
+					</code></pre>
+				</section>
+				<section>
+					<pre><code class="hljs" data-trim data-noescape>
+					const scoreboardReducer = createReducer(
+					initialState,
+						on(ScoreboardPageActions.homeScore, state => ({ ...state, home: state.home + 1 })),
+						on(ScoreboardPageActions.awayScore, state => ({ ...state, away: state.away + 1 })),
+						on(ScoreboardPageActions.resetScore, state => ({ home: 0, away: 0 })),
+						on(ScoreboardPageActions.setScores, (state, { game }) => ({ home: game.home, away: game.away }))
+					);
+					
+					export function reducer(state: State | undefined, action: Action) {
+					return scoreboardReducer(state, action);
+					}
+					</code></pre>
+				</section>
+				<section>
+					<pre><code class="hljs" data-trim data-noescape>
+					import { NgModule } from '@angular/core';
+					import { StoreModule } from '@ngrx/store';
+					import * as fromScoreboard from './reducers/scoreboard.reducer';
+					
+					@NgModule({
+						imports: [
+						StoreModule.forRoot({ game: fromScoreboard.reducer })
+						],
+					})
+					export class AppModule {}
+					</code></pre>
+				</section>
+			</section>
+			<section>
+				<section>
+					Agora é mão na massa !
+				</section>
+			</section>
+		</div>
+	</div>
+
+	<script src="js/reveal.js"></script>
+
+	<script>
+		// More info about config & dependencies:
+		// - https://github.com/hakimel/reveal.js#configuration
+		// - https://github.com/hakimel/reveal.js#dependencies
+		Reveal.initialize({
+			dependencies: [
+				{ src: 'plugin/markdown/marked.js' },
+				{ src: 'plugin/markdown/markdown.js' },
+				{ src: 'plugin/notes/notes.js', async: true },
+				{ src: 'plugin/highlight/highlight.js', async: true }
+			]
+		});
+	</script>
+</body>
+
+</html>
